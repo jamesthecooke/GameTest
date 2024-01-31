@@ -3,7 +3,7 @@ Player = {}
 
 function Player:load()
     self.x = 50
-    self.y = love.graphics.getHeight() / 2
+    self.y = love.graphics.getHeight() - 35
     self.width = 20
     self.height = 100
     self.speed = 500 
@@ -12,6 +12,7 @@ end
 function Player:update(dt)
     self:move(dt)
     self:checkBoundries()
+    self:crouch(dt)
     
 end
 
@@ -24,12 +25,24 @@ function Player:move(dt)
         self.x = self.x + self.speed * dt
     elseif love.keyboard.isDown("a") then 
         self.x = self.x - self.speed * dt
-    elseif love.keyboard.isDown("w") then 
-        self.y = self.y - self.speed * dt
-    elseif love.keyboard.isDown("s") then 
-        self.y = self.y + self.speed * dt
+    -- elseif love.keyboard.isDown("w") then 
+    --     self.y = self.y - self.speed * dt
+    -- elseif love.keyboard.isDown("s") then 
+    --     self.y = self.y + self.speed * dt
     end
 end
+
+function Player:crouch(dt)
+    local crouchHeight = 50
+    if love.keyboard.isDown("s") then 
+        self.y = self.y + (self.height - crouchHeight)
+        self.height = crouchHeight
+    else
+        self.y = self.y - (self.height - 100)
+        self.height = 100
+    end
+end
+
 
 function Player:checkBoundries()
     if self.x < 0 then 
