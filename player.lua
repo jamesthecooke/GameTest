@@ -6,7 +6,7 @@ function Player:load()
     self.y = love.graphics.getHeight() - 35
     self.width = 20
     self.height = 100
-    self.speed = 500 
+    elf.speed = 500
 end
 
 function Player:update(dt)
