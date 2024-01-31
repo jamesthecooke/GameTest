@@ -10,6 +10,7 @@ function Player:load()
 end
 
 function Player:update(dt)
+    self:move(dt)
     
 end
 
@@ -17,4 +18,14 @@ function Player:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
 
-
+function Player:move(dt)
+    if love.keyboard.isDown("d") then
+        self.x = self.x + self.speed * dt
+    elseif love.keyboard.isDown("a") then 
+        self.x = self.x - self.speed * dt
+    elseif love.keyboard.isDown("w") then 
+        self.y = self.y - self.speed * dt
+    elseif love.keyboard.isDown("s") then 
+        self.y = self.y + self.speed * dt
+    end
+end
